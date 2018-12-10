@@ -1,0 +1,7 @@
+@mixin mQ($width) {
+  @media only screen and (min-width: $width) {
+    @content
+  }
+}
+
+$main-width: 1400px, 1000px
