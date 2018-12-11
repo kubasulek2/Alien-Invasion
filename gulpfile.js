@@ -1,7 +1,7 @@
 var
 	gulp = require( 'gulp' ),
 	browserSync = require( 'browser-sync' ),
-	$ = require( 'gulp-load-plugins' )( {lazy: true} );
+	$ = require( 'gulp-load-plugins' )( {lazy: true} ),
 	uglify = require('gulp-uglify-es').default;
 
 gulp.task( 'styles', function () {

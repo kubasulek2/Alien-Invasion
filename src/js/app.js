@@ -1,11 +1,11 @@
 $( () => {
     const shot = new Audio('../music/shot.mp3');
-   /* const soundtrack = new Audio('../music/Quirky-Action2.mp3');
+    const soundtrack = new Audio('../music/Quirky-Action2.mp3');
     soundtrack.addEventListener('ended', function() {
         this.currentTime = 0;
         this.play();
     }, false);
-    soundtrack.play();*/
+    //pusc to dopiero gdy sie zaladuje, jakis check musisz zrobic;
 //find mouse position within game div, put eventlisteners on it
     const cursor = $('#cursor');
     let mouseX = 0, mouseY = 0;
@@ -27,18 +27,24 @@ $( () => {
 
 
     game.on('click', function (e) {
-            e.stopImmediatePropagation();
+            //e.stopImmediatePropagation();
+
             if (!disabled){
                 shot.play();
+                cursor.addClass("reload")
             }
 
 
             disabled = true;
             window.setTimeout(function () {
-                disabled = false
+                disabled = false;
+                cursor.removeClass("reload")
             },1500)
         });
 
+    function reloadAnimation(){
+
+    }
 
 
 
