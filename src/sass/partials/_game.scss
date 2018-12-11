@@ -9,11 +9,24 @@
 
 
   #cursor{
-    width: 50px;
-    height: 50px;
-    background: $cursor-url;
+    width: 35px;
+    height: 35px;
+    background: $cursor-url 0% 0%/contain;
     position: absolute;
     display: none;
+
+    @include mQ(1024px) {
+      width: 40px;
+      height: 40px;
+    }
+    @include mQ(1200px) {
+      width: 45px;
+      height: 45px;
+    }
+    @include mQ(1400px) {
+      width: 50px;
+      height: 50px;
+    }
   }
 
 
@@ -32,8 +45,9 @@
 
 }
 @keyframes reload {
-  10%{ transform: translateY(0)}
-  15%{ transform: translateY(40%)}
+  5%{ transform: translateY(-40%)}
+  10%{ transform: translateY(0%)}
+  30%{ transform: translateY(0%)}
   35%{ transform: translateY(40%)}
   40%{ transform: translateY(-20%)}
   60%{ transform: translateY(20%)}

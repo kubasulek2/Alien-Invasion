@@ -13,42 +13,6 @@ $( () => {
     const game = $('#game');
 
 
-    game.on('mousemove', function(e){
-            mouseX = e.pageX - game.offset().left;
-            mouseY = e.pageY - game.offset().top;
-        });
-    game.on('mouseenter', function () {cursor.css("display","block");
-            cursor.css("display","block");
-        });
-
-    game.on('mouseleave',function () {
-            cursor.removeAttr('style')
-        });
-
-
-    game.on('click', function (e) {
-            //e.stopImmediatePropagation();
-
-            if (!disabled){
-                shot.play();
-                cursor.addClass("reload")
-            }
-
-
-            disabled = true;
-            window.setTimeout(function () {
-                disabled = false;
-                cursor.removeClass("reload")
-            },1500)
-        });
-
-    function reloadAnimation(){
-
-    }
-
-
-
-// cache the selector
     let xp = 0, yp = 0;
     const drawCursor = function(){
         xp += (mouseX - xp-25);
@@ -57,7 +21,7 @@ $( () => {
 
     };
 
-
+    //cache element
     window.rInterval=function(callback,delay) {
         let dateNow = Date.now,
             requestAnimation=window.requestAnimationFrame,
@@ -72,8 +36,37 @@ $( () => {
             clear: function(){ stop=1 }
         }
     };
+
+    const handleClick = function(){
+        if (!disabled){
+            shot.play();
+            cursor.addClass("reload")
+        }
+
+
+        disabled = true;
+        window.setTimeout(function () {
+            disabled = false;
+            cursor.removeClass("reload")
+        },1500)
+    };
+
     window.rInterval(drawCursor,1);
 
+    game.on('mousemove', function(e){
+        mouseX = e.pageX - game.offset().left;
+        mouseY = e.pageY - game.offset().top;
+    });
+    game.on('mouseenter', function () {cursor.css("display","block");
+        cursor.css("display","block");
+    });
+
+    game.on('mouseleave',function () {
+        cursor.removeAttr('style')
+    });
+
+
+    game.on('click', handleClick)
 
 
 
