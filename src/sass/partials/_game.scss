@@ -5,6 +5,7 @@
   display: flex;
   flex-wrap: wrap;
   position: relative;
+  cursor: none;
 
 
   #cursor{
@@ -14,14 +15,14 @@
     position: absolute;
     display: none;
   }
-  &:hover #cursor{
-    display: block;
-  }
+
+
 
   @for $i from 1 through 15{
     #box-#{$i}{
       width: calc(100% / 5);
       height: calc(100% / 3);
+      position: relative;
     }
   }
 
