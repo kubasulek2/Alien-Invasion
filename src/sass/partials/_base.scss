@@ -1,15 +1,43 @@
+html {
+  font-size: 100%;
+
+  body {
+    font-size: 100%;
+  }
+}
+
 #container{
   background: $gradient;
-  width: nth($main-width,2);
-  height: calc( #{nth($main-width, 2)} * 0.5177);
+  width: nth($main-width, 2);
+  height: calc(#{nth($main-width, 2)} * 0.5177);
   border: 1px solid black;
-  margin: 10vh auto ;
+  margin: 10vh auto;
   display: flex;
-  justify-content: space-around;
-  align-items: center;
+  flex-direction: column;
+  font-family: 'Invasion2000';
 
-  @include mQ(1400px){
+  @include mQ(1400px) {
     width: nth($main-width, 1);
-    height: calc( #{nth($main-width, 1)} * 0.5177);
+    height: calc(#{nth($main-width, 1)} * 0.5177);
+  }
+
+  .row {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+
+    h1 {
+      font-family: 'Zero Velocity BRK';
+      text-align: center;
+      width: 100%;
+      color: white;
+    }
+  }
+  .row-1{
+    height: 10%;
+  }
+  .row-2{
+    height: 90%
   }
 }

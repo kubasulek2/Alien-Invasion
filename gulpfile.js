@@ -48,6 +48,18 @@ gulp.task( 'images', function () {
 		.pipe( $.size( {title: 'images'} ) );
 } );
 
+gulp.task('music', function () {
+    return gulp
+        .src( 'src/music/**' )
+        .pipe(gulp.dest('public/music'));
+})
+
+gulp.task('fonts', function () {
+    return gulp
+        .src( 'src/fonts/**' )
+        .pipe(gulp.dest('public/fonts'));
+})
+
 gulp.task( 'html', function () {
 	return gulp
 		.src( './src/**/*.html' )
@@ -81,6 +93,10 @@ gulp.task( 'watch', function () {
 	gulp.watch( 'src/js/vendor/*', ['vendorScripts', browserSync.reload] );
 	// Watch image files
 	gulp.watch( 'src/images/**/*', ['images', browserSync.reload] );
+	//Watch mp3 files
+	gulp.watch( 'src/music/**/*', ['music', browserSync.reload] );
+	//Watch fonts
+	gulp.watch( 'src/fonts/**/*', ['fonts', browserSync.reload] );
 } );
 
 gulp.task( 'default', function () {
@@ -89,8 +105,10 @@ gulp.task( 'default', function () {
 		'vendorScripts',
 		'scripts',
 		'images',
+		'music',
 		'html',
 		'browser-sync',
+		'fonts',
 		'watch'
 	);
 } );
