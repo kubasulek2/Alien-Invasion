@@ -1,1 +1,1 @@
-$(()=>{});
+$(()=>{let e=0,n=0;$("#game").on("mousemove",function(t){e=t.pageX-$("#game").offset().left,n=t.pageY-$("#game").offset().top});const t=$("#cursor");let o=0,a=0;window.rInterval=function(e,n){let t,o=Date.now,a=window.requestAnimationFrame,f=o(),r=function(){o()-f<n||(f+=n,e()),t||a(r)};return a(r),{clear:function(){t=1}}},window.rInterval(function(){o+=e-o-25,a+=n-a-25,t.css({left:o,top:a})},1)});

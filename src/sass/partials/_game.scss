@@ -2,5 +2,29 @@
   @include box;
   width: 76%;
   background: #493977 #{$background-url} 0% 0% / cover;
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+
+
+  #cursor{
+    width: 50px;
+    height: 50px;
+    background: $cursor-url;
+    position: absolute;
+    display: none;
+  }
+  &:hover #cursor{
+    display: block;
+  }
+
+  @for $i from 1 through 15{
+    #box-#{$i}{
+      width: calc(100% / 5);
+      height: calc(100% / 3);
+    }
+  }
+
+
 
 }
