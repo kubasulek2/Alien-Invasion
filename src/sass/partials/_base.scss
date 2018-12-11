@@ -1,6 +1,7 @@
 *{box-sizing: border-box}
 html {
   font-size: 60%;
+  background: rgba(0,0,0, 0.1);
   @include mQ(1024px){
     font-size: 70%;
   }

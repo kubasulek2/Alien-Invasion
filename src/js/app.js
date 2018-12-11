@@ -41,6 +41,7 @@ $( () => {
         if (!disabled){
             shot.play();
             cursor.addClass("reload")
+            console.log("jestem");
         }
 
 
