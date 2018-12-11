@@ -1,6 +1,5 @@
 #game{
+  @include box;
   width: 75%;
-  height: 90%;
-  border: 1px solid wheat;
   background: #493977 #{$background-url} 0% 0% / cover;
 }

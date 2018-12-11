@@ -17,6 +17,11 @@
   font-style: normal;
 }
 
+@mixin box {
+  margin-top: 0.3em;
+  height: 95%;
+}
+
 
 @mixin mQ($width) {
   @media only screen and (min-width: $width) {

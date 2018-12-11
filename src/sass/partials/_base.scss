@@ -3,6 +3,7 @@ html {
 
   body {
     font-size: 100%;
+    color: $font-color;
   }
 }
 
@@ -10,11 +11,12 @@ html {
   background: $gradient;
   width: nth($main-width, 2);
   height: calc(#{nth($main-width, 2)} * 0.5177);
-  border: 1px solid black;
+  //border: 1px solid black;
   margin: 10vh auto;
   display: flex;
   flex-direction: column;
   font-family: 'Invasion2000';
+  border-radius: 4px;
 
   @include mQ(1400px) {
     width: nth($main-width, 1);
@@ -27,17 +29,19 @@ html {
     align-items: center;
     width: 100%;
 
+
     h1 {
       font-family: 'Zero Velocity BRK';
       text-align: center;
       width: 100%;
-      color: white;
+      font-size: 4em;
+      padding-top: 0.2em;
     }
   }
   .row-1{
     height: 10%;
   }
   .row-2{
-    height: 90%
+    height: 90%;
   }
 }
