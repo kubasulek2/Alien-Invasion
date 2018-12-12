@@ -1,5 +1,5 @@
 #game{
-  @include box;
+  @include frame;
   width: 76%;
   background: #493977 #{$background-url} 0% 0% / cover;
   display: flex;
@@ -55,14 +55,13 @@
 
 
 
-  @for $i from 1 through 15{
-    #box-#{$i}{
-      width: calc(100% / 5);
-      height: calc(100% / 3);
-      position: relative;
-      border: 1px solid white;
+  .box{
+    width: calc(100% / 5);
+    height: calc(100% / 3);
+    position: relative;
+    //border: 1px solid white;
     }
-  }
+
 
   .reload{
     animation: reload 1.5s 1 linear;

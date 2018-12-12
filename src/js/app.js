@@ -2,6 +2,7 @@ $( () => {
     const soundtrack = new Audio('../music/Quirky-Action2.mp3');
     const game = $('#game');
     let newGame;
+
     soundtrack.addEventListener('ended', function() {
         this.currentTime = 0;
         this.play();
@@ -73,10 +74,16 @@ $( () => {
 
 
     function Game() {
+        this.boxes = $()
         this.level = 1;
-        this.enemies = [];
+        this.enemiesData = [];
         this.startNewGame = function () {
+            window.setInterval(()=>{
 
+            })
+        };
+        this.drawEnemy = function () {
+          let enemyLocation = Math.random()
         };
         this.levelUp = function () {
 
@@ -84,7 +91,9 @@ $( () => {
         this.animateStart = function () {
             const countDown = $('#countDown');
             let counter = 3;
+
             countDown.addClass("countAnimation");
+
             let id = window.setInterval(()=>{
                 counter--;
                 countDown.text(counter);
@@ -94,9 +103,7 @@ $( () => {
                         countDown.text("3");
                         countDown.removeClass("countAnimation");
                         window.clearInterval(id);
-
                     }
-
                 }
             },500)
         }
