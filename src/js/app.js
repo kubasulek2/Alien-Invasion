@@ -1,13 +1,5 @@
 $( () => {
-    const soundtrack = new Audio('../music/Quirky-Action2.mp3');
-    const game = $('#game');
-    let newGame;
-
-    soundtrack.addEventListener('ended', function() {
-        this.currentTime = 0;
-        this.play();
-    }, false);
-
+    const newGame = new Game();
 
     const cursor = {
         shot: new Audio('../music/shot.mp3'),
@@ -55,18 +47,18 @@ $( () => {
     //cursor.clear();  zeby zatrzymac animacje
 
 
-    game.on('mousemove', function(e){
-        cursor.mouseX = e.pageX - game.offset().left;
-        cursor.mouseY = e.pageY - game.offset().top;
+    newGame.game.on('mousemove', function(e){
+        cursor.mouseX = e.pageX - newGame.game.offset().left;
+        cursor.mouseY = e.pageY - newGame.game.offset().top;
     });
-    game.on('mouseenter', function () {
+    newGame.game.on('mouseenter', function () {
         cursor.subject.css("display","block");
     });
 
-    game.on('mouseleave',function () {
+    newGame.game.on('mouseleave',function () {
         cursor.subject.removeAttr('style')
     });
-    game.on('click', ()=>{
+    newGame.game.on('click', ()=>{
         cursor.handleClick();
 
     });
@@ -75,27 +67,58 @@ $( () => {
 
     function Game() {
         this.boxes = $('.box');
+        this.game = $('#game');
         this.level = 1;
         this.enemiesData = [];
         this.startNewGame = function () {
-            window.setInterval(()=>{
+            let paused = false;
+            //this.soundtrack();
+            this.game.on('click','.alien', this.removeAlien);
+            this.animateStart();
+            setTimeout(()=>{
+                this.drawEnemy();
+
+            },2500);
+
+            const id = window.setInterval(()=>{
 
             })
+        };
+        this.removeAlien =  (e)=> {
+            let alien = $(e.currentTarget);
+
+            if (!cursor.disabled){
+                $(e.currentTarget).fadeOut(400,function () {
+                    alien.remove()
+                });
+
+                this.enemiesData = this.enemiesData.filter((el)=>el.element !== e.currentTarget.parentElement);
+            }
+        };
+        this.soundtrack = function () {
+            const song = new Audio("../music/Quirky-Action2.mp3");
+            song.addEventListener('ended', function() {
+                this.currentTime = 0;
+                this.play();
+            }, false);
+            song.play()
         };
         this.drawEnemy = function () {
             let alien = $("<div class='alien'><img src=\"images/alien.png\" alt=\"\"></div>");
             let flag = false;
-            let enemyLocation = Math.ceil(Math.random()*15);
+            let enemyLocation = Math.floor(Math.random()*15);
+            alien.find("img").attr("draggable", 'false');
+
             if( this.boxes.find(".alien").length === 15){ return }
-            console.log(flag);
 
             this.boxes.each((index,el)=>{
-                (index === enemyLocation - 1 && $(el).has('.alien').length === 0)
-                && ($(el).append(alien), flag = true)
-
-
+                if(index === enemyLocation && $(el).has('.alien').length === 0){
+                    $(el).append(alien);
+                    flag = true;
+                    this.enemiesData.push({location:index, element:el})
+                }
             });
-            console.log(flag);
+            alien.addClass(`animation${Math.ceil(Math.random()*3)}`).addClass(`level${this.level}`);
 
             flag || this.drawEnemy()
         };
@@ -126,17 +149,11 @@ $( () => {
 
 
     $('#start').on("click", ()=>{
-        newGame = new Game();
+        newGame.startNewGame()
         //newGame.animateStart();
-        newGame.drawEnemy();
-        //$('.alien').addClass("animation1").addClass("level1");
+        //newGame.soundtrack()
 
-        //soundtrack.play()
-    });
-    $('.alien').on('click',function detectAlien(e) {
-        if(!cursor.disabled)$(this).fadeOut(400,()=>{
-            this.remove();
-        });
+
     });
 
 });
