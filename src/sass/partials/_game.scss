@@ -42,6 +42,19 @@
   .reload{
     animation: reload 1.5s 1 linear;
   }
+  #countDown{
+    display: none;
+    position: absolute;
+    font-size: 10em;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+  }
+  #countDown.countAnimation{
+    display: block;
+    animation: countDown .5s 5 linear;
+  }
 
 }
 @keyframes reload {
@@ -52,4 +65,15 @@
   40%{ transform: translateY(-20%)}
   60%{ transform: translateY(20%)}
   80%{ transform: translateY(0%)}
+}
+@keyframes countDown {
+  80%{
+    top: 30%;
+    font-size: 50em
+  }
+  100%{
+    top: 25%;
+    font-size: 60em;
+    opacity: 0;
+  }
 }

@@ -1,6 +1,7 @@
 $( () => {
     const soundtrack = new Audio('../music/Quirky-Action2.mp3');
     const game = $('#game');
+    let newGame;
     soundtrack.addEventListener('ended', function() {
         this.currentTime = 0;
         this.play();
@@ -68,8 +69,40 @@ $( () => {
         cursorr.handleClick()
     });
     function Game() {
+        this.level = 1;
+        this.enemies = [];
+        this.startNewGame = function () {
 
+        };
+        this.levelUp = function () {
+
+        };
+        this.animateStart = function () {
+            const countDown = $('#countDown');
+            let counter = 3;
+            countDown.addClass("countAnimation");
+            let id = window.setInterval(()=>{
+                counter--;
+                countDown.text(counter);
+                if(counter<0){
+                    countDown.text("Start");
+                    if(counter<-1){
+                        countDown.text("3");
+                        countDown.removeClass("countAnimation");
+                        window.clearInterval(id);
+
+                    }
+
+                }
+            },500)
+        }
     }
 
+
+
+    $('#start').on("click", ()=>{
+        newGame = new Game();
+        newGame.animateStart()
+    })
 
 });
