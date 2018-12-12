@@ -112,7 +112,9 @@ $( () => {
         //soundtrack.play()
     });
     $('.alien').on('click',function detectAlien(e) {
-        if(!cursor.disabled)$(this).remove();
+        if(!cursor.disabled)$(this).fadeOut(400,()=>{
+            this.remove();
+        });
     });
 
 });

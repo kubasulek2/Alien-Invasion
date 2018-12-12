@@ -34,14 +34,14 @@
   .alien{
     position: absolute;
     border: 1px solid white;
-    top: 50%;
-    left: 50%;
+    top: 20%;
+    left: 20%;
     transform: translate(-50%, -50%);
     width: 40%;
     height: 24%;
     border-radius: 50%;
     &.start{
-      animation: alienMove1 2s infinite linear;
+      animation: alienMove1 2s infinite linear alternate;
     }
     img{
       width: 100%;
@@ -104,7 +104,18 @@
 }
 
 @keyframes alienMove1 {
-  25%{ top: 25%}
-  75%{top: 75%}
-  100%{top: 50%}
+  30%{
+    top: 20%;
+
+    left: 80%;
+
+  }
+  70%{
+    top: 80%;
+    left: 20%;
+  }
+  100%{
+    top: 80%;
+    left: 80%;
+  }
 }
