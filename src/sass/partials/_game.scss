@@ -15,6 +15,7 @@
     position: absolute;
     display: none;
     z-index: 999;
+    pointer-events: none;
 
     @include mQ(1024px) {
       width: 40px;

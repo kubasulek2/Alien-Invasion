@@ -66,8 +66,12 @@ $( () => {
         cursorr.subject.removeAttr('style')
     });
     game.on('click', ()=>{
-        cursorr.handleClick()
+        cursorr.handleClick();
+
     });
+
+
+
     function Game() {
         this.level = 1;
         this.enemies = [];
@@ -103,8 +107,12 @@ $( () => {
     $('#start').on("click", ()=>{
         newGame = new Game();
         newGame.animateStart();
-        $('.alien').addClass("start")
+        $('.alien').addClass("start");
+
         //soundtrack.play()
-    })
+    });
+    $('.alien').on('click',function detectAlien(e) {
+        console.log("aaa    ");
+    });
 
 });
