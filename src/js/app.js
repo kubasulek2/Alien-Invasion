@@ -68,21 +68,28 @@ $( () => {
     function Game() {
         this.boxes = $('.box');
         this.game = $('#game');
+        this.score =$('#score');
+        this.points = 0;
         this.level = 1;
         this.enemiesData = [];
+        this.timeElapsed= 0;
         this.startNewGame = function () {
             let paused = false;
             //this.soundtrack();
             this.game.on('click','.alien', this.removeAlien);
             this.animateStart();
+
             setTimeout(()=>{
                 this.drawEnemy();
 
+                const id = window.setInterval(()=>{
+                    this.timeElapsed +=1;
+                    !!(this.timeElapsed%6) || this.drawEnemy();
+                },1000)
+
             },2500);
 
-            const id = window.setInterval(()=>{
 
-            })
         };
         this.removeAlien =  (e)=> {
             let alien = $(e.currentTarget);
@@ -93,6 +100,9 @@ $( () => {
                 });
 
                 this.enemiesData = this.enemiesData.filter((el)=>el.element !== e.currentTarget.parentElement);
+                this.points += 1000;
+                this.score.text(this.points)
+
             }
         };
         this.soundtrack = function () {
