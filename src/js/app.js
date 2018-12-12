@@ -74,7 +74,7 @@ $( () => {
 
 
     function Game() {
-        this.boxes = $()
+        this.boxes = $('.box');
         this.level = 1;
         this.enemiesData = [];
         this.startNewGame = function () {
@@ -83,7 +83,21 @@ $( () => {
             })
         };
         this.drawEnemy = function () {
-          let enemyLocation = Math.random()
+            let alien = $("<div class='alien'><img src=\"images/alien.png\" alt=\"\"></div>");
+            let flag = false;
+            let enemyLocation = Math.ceil(Math.random()*15);
+            if( this.boxes.find(".alien").length === 15){ return }
+            console.log(flag);
+
+            this.boxes.each((index,el)=>{
+                (index === enemyLocation - 1 && $(el).has('.alien').length === 0)
+                && ($(el).append(alien), flag = true)
+
+
+            });
+            console.log(flag);
+
+            flag || this.drawEnemy()
         };
         this.levelUp = function () {
 
@@ -113,8 +127,9 @@ $( () => {
 
     $('#start').on("click", ()=>{
         newGame = new Game();
-        newGame.animateStart();
-        $('.alien').addClass("animation1").addClass("level1");
+        //newGame.animateStart();
+        newGame.drawEnemy();
+        //$('.alien').addClass("animation1").addClass("level1");
 
         //soundtrack.play()
     });

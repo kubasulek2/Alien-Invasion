@@ -33,11 +33,11 @@ gulp.task( 'scripts', function () {
 			'./src/js/!(vendor)**/!(app)*.js',
 			'./src/js/app.js'
 		] )
-		.pipe( $.plumber() )
 		.pipe(sourcemaps.init())
+		.pipe( $.plumber() )
 		.pipe( $.babel() )
 		.pipe(uglify())
-		.pipe(sourcemaps.write())
+		.pipe(sourcemaps.write(''))
 		.pipe( gulp.dest( 'public/js' ) )
 		.pipe( browserSync.reload( {stream: true} ) );
 } );
