@@ -1,15 +1,20 @@
-var
+const
 	gulp = require( 'gulp' ),
 	browserSync = require( 'browser-sync' ),
 	$ = require( 'gulp-load-plugins' )( {lazy: true} ),
-	uglify = require('gulp-uglify-es').default;
+	uglify = require('gulp-uglify-es').default,
+	sourcemaps = require('gulp-sourcemaps'),
+	gulpResolveUrl = require('gulp-resolve-url');
 
 gulp.task( 'styles', function () {
 	return gulp
 		.src( './src/sass/**/*.scss' )
+		.pipe(sourcemaps.init())
 		.pipe( $.sass().on( 'error', $.sass.logError ) )
 		.pipe( $.autoprefixer( 'last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4' ) )
 		.pipe( $.cleanCss() )
+		.pipe(gulpResolveUrl())
+		.pipe(sourcemaps.write())
 		.pipe( gulp.dest( 'public/css' ) )
 		.pipe( browserSync.reload( {stream: true} ) );
 } );
@@ -19,6 +24,9 @@ gulp.task('vendorScripts', function() {
 			.pipe(gulp.dest('public/js/vendor'));
 });
 
+// js urls arent corectly rewritten, so to open a page from public/html file, rewrite publicj/js/app.js url: instead
+// ../music/shot.mp3 , type: /music/shot/mp3
+
 gulp.task( 'scripts', function () {
 	return gulp
 		.src( [
@@ -26,9 +34,10 @@ gulp.task( 'scripts', function () {
 			'./src/js/app.js'
 		] )
 		.pipe( $.plumber() )
+		.pipe(sourcemaps.init())
 		.pipe( $.babel() )
-		.pipe( $.concat( 'app.js' ) )
-		.pipe( uglify() )
+		.pipe(uglify())
+		.pipe(sourcemaps.write())
 		.pipe( gulp.dest( 'public/js' ) )
 		.pipe( browserSync.reload( {stream: true} ) );
 } );

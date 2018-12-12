@@ -26,8 +26,10 @@
     "gulp-load-plugins": "^1.5.0",
     "gulp-plumber": "^1.1.0",
     "gulp-rename": "^1.2.2",
+    "gulp-resolve-url": "0.0.2",
     "gulp-sass": "^4.0.1",
     "gulp-size": "^3.0.0",
+    "gulp-sourcemaps": "^2.6.4",
     "gulp-uglify-es": "^1.0.4"
   },
   "dependencies": {}
