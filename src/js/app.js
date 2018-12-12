@@ -102,7 +102,8 @@ $( () => {
 
     $('#start').on("click", ()=>{
         newGame = new Game();
-        newGame.animateStart()
+        newGame.animateStart();
+        //soundtrack.play()
     })
 
 });
