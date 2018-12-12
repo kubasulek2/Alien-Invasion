@@ -7,8 +7,8 @@ $( () => {
         this.play();
     }, false);
 
-    const cursor = $('#cursor');
-    const cursorr = {
+
+    const cursor = {
         shot: new Audio('../music/shot.mp3'),
         disabled: false,
         subject: $('#cursor'),
@@ -29,7 +29,7 @@ $( () => {
                 start=dateNow(),
                 stop,
                 intervalFunc= ()=> {
-                    dateNow()-start<delay||(start+=delay,  cursorr.drawCursor());
+                    dateNow()-start<delay||(start+=delay,  cursor.drawCursor());
                     stop||requestAnimation(intervalFunc)
                 };
             requestAnimation(intervalFunc);
@@ -50,23 +50,23 @@ $( () => {
         }
 
     };
-    cursorr.animateCursor(1);
-    //cursorr.clear();  zeby zatrzymac animacje
+    cursor.animateCursor(1);
+    //cursor.clear();  zeby zatrzymac animacje
 
 
     game.on('mousemove', function(e){
-        cursorr.mouseX = e.pageX - game.offset().left;
-        cursorr.mouseY = e.pageY - game.offset().top;
+        cursor.mouseX = e.pageX - game.offset().left;
+        cursor.mouseY = e.pageY - game.offset().top;
     });
-    game.on('mouseenter', function () {cursor.css("display","block");
-        cursorr.subject.css("display","block");
+    game.on('mouseenter', function () {
+        cursor.subject.css("display","block");
     });
 
     game.on('mouseleave',function () {
-        cursorr.subject.removeAttr('style')
+        cursor.subject.removeAttr('style')
     });
     game.on('click', ()=>{
-        cursorr.handleClick();
+        cursor.handleClick();
 
     });
 
@@ -112,7 +112,7 @@ $( () => {
         //soundtrack.play()
     });
     $('.alien').on('click',function detectAlien(e) {
-        console.log("aaa    ");
+        if(!cursor.disabled)$(this).remove();
     });
 
 });
