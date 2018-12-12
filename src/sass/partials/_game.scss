@@ -39,6 +39,9 @@
     width: 40%;
     height: 24%;
     border-radius: 50%;
+    &.start{
+      animation: alienMove1 2s infinite linear;
+    }
     img{
       width: 100%;
       height: auto;
@@ -97,4 +100,10 @@
     font-size: 60em;
     opacity: 0;
   }
+}
+
+@keyframes alienMove1 {
+  25%{ top: 25%}
+  75%{top: 75%}
+  100%{top: 50%}
 }

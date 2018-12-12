@@ -103,6 +103,7 @@ $( () => {
     $('#start').on("click", ()=>{
         newGame = new Game();
         newGame.animateStart();
+        $('.alien').addClass("start")
         //soundtrack.play()
     })
 
