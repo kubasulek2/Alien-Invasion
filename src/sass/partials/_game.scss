@@ -33,28 +33,32 @@
   }
   .alien{
     position: absolute;
-    border: 1px solid white;
+    //border: 1px solid white;
     top: 20%;
     left: 20%;
     transform: translate(-50%, -50%);
     width: 40%;
     height: 24%;
     border-radius: 50%;
-    &.start{
-      animation: alienMove1 2s infinite linear alternate;
+    &.animation1{
+      animation: alienMove1 4s infinite linear;
+      &.level1{
+        border: 2px solid black;
+      }
+    }
+    &.animation2{
+      animation: alienMove2 4s infinite linear;
+    }
+    &.animation3{
+      animation: alienMove3 4s infinite linear alternate;
     }
     img{
       width: 100%;
       height: auto;
       position: absolute;
       top: -20%
-
     }
-
   }
-
-
-
   .box{
     width: calc(100% / 5);
     height: calc(100% / 3);
@@ -102,7 +106,7 @@
   }
 }
 
-@keyframes alienMove1 {
+@keyframes alienMove3 {
   30%{
     top: 20%;
 
@@ -116,5 +120,61 @@
   100%{
     top: 80%;
     left: 80%;
+  }
+}
+@keyframes alienMove2 {
+  10%{
+    top: 20%;
+
+    left: 30%;
+
+  }
+  50%{
+    top: 80%;
+    left: 80%;
+  }
+  60%{
+    top: 80%;
+    left: 70%;
+  }
+  100%{
+    top: 20%;
+    left: 20%;
+  }
+}
+@keyframes alienMove1 {
+  5%{
+    top: 15%;
+
+    left: 25%;
+
+  }
+  25%{
+    top: 15%;
+    left: 75%;
+  }
+  30%{
+    top: 20%;
+    left: 80%;
+  }
+  50%{
+    top: 75%;
+    left: 80%;
+  }
+  55%{
+    top: 80%;
+    left: 75%;
+  }
+  75%{
+    top: 80%;
+    left: 25%;
+  }
+  80%{
+    top: 75%;
+    left: 20%;
+  }
+  100%{
+    top: 20%;
+    left: 20%;
   }
 }

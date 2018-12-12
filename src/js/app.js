@@ -114,7 +114,7 @@ $( () => {
     $('#start').on("click", ()=>{
         newGame = new Game();
         newGame.animateStart();
-        $('.alien').addClass("start");
+        $('.alien').addClass("animation1").addClass("level1");
 
         //soundtrack.play()
     });
