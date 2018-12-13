@@ -42,12 +42,13 @@
     border-radius: 50%;
     &.animation1{
       animation: alienMove1 4s infinite linear;
-      &.level1{
-        border: 2px solid black;
-      }
+
     }
     &.animation2{
       animation: alienMove2 4s infinite linear;
+      &.level1{
+        border: 2px solid black;
+      }
     }
     &.animation3{
       animation: alienMove3 4s infinite linear alternate;

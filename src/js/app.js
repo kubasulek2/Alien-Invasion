@@ -76,22 +76,41 @@ $( () => {
         this.startNewGame = function () {
             let paused = false;
             //this.soundtrack();
-            this.game.on('click','.alien', this.removeAlien);
+            this.game.on('click','.alien', this.killAlien);
             this.animateStart();
 
             setTimeout(()=>{
                 this.drawEnemy();
 
                 const id = window.setInterval(()=>{
-                    this.timeElapsed +=1;
-                    !!(this.timeElapsed%6) || this.drawEnemy();
-                },1000)
+                    this.timeElapsed = parseFloat((this.timeElapsed + 0.1).toFixed(2));
+                    !!(this.timeElapsed % 3) || this.drawEnemy();
+
+                    this.removeAlien();
+                },100)
 
             },2500);
 
 
         };
-        this.removeAlien =  (e)=> {
+        this.removeAlien = function(){
+            this.enemiesData.forEach((el,index)=>{
+                let alien = $(el.element).find('div');
+                if( this.timeElapsed - el.creationTime >= 5 ){
+                    alien.remove();
+                    this.enemiesData.splice(index,1)
+                    }
+
+
+                //console.log(this.timeElapsed,  el.creationTime);
+                /*this.enemiesData = this.enemiesData.filter( el => {
+                    if( this.timeElapsed - el.creationTime <= 3){
+                        return el
+                    }
+                } )*/
+            })
+        };
+        this.killAlien =  (e)=> {
             let alien = $(e.currentTarget);
 
             if (!cursor.disabled){
@@ -125,7 +144,7 @@ $( () => {
                 if(index === enemyLocation && $(el).has('.alien').length === 0){
                     $(el).append(alien);
                     flag = true;
-                    this.enemiesData.push({location:index, element:el})
+                    this.enemiesData.push({location:index, element:el, creationTime: this.timeElapsed})
                 }
             });
             alien.addClass(`animation${Math.ceil(Math.random()*3)}`).addClass(`level${this.level}`);
