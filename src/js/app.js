@@ -39,7 +39,7 @@ $( () => {
             window.setTimeout(()=> {
                 this.disabled = false;
                 this.subject.removeClass("reload")
-            },1500)
+            },600)
         }
 
     };
@@ -69,6 +69,7 @@ $( () => {
         this.boxes = $('.box');
         this.game = $('#game');
         this.score =$('#score');
+        this.timer = $('#time');
         this.points = 0;
         this.levelPoints = 0;
         this.level = 1;
@@ -78,7 +79,7 @@ $( () => {
         this.gameOver = false;
         this.startNewGame = function () {
 
-            //this.soundtrack();
+            this.soundtrack();
             this.game.on('click','.alien', this.killAlien);
             this.animateStart();
 
@@ -87,12 +88,28 @@ $( () => {
 
                 const id = window.setInterval(()=>{
                     if (!this.paused) {
+                        let levelDuration = 40;
 
+                        switch (this.level) {
+                            case 3:
+                                levelDuration = 37;
+                                break;
+                            case 6:
+                                levelDuration = 34;
+                                break;
+                            case 9:
+                                levelDuration = 31;
+                                break;
+                            case 10:
+                                levelDuration = 29;
+                                break;
+                        }
+                        this.timer.text(parseFloat(levelDuration - this.timeElapsed).toFixed(0));
                         this.timeElapsed = parseFloat((this.timeElapsed + 0.1).toFixed(2));
-                        !!(this.timeElapsed % 3) || this.drawEnemy();
                         this.removeAlien();
+                        !!(this.timeElapsed % 2) || this.drawEnemy();
 
-                        if (this.timeElapsed >= 4) {
+                        if (this.timeElapsed >= levelDuration) {
                             this.levelUp()
                         }
                         if (this.gameOver){
@@ -108,18 +125,27 @@ $( () => {
         this.removeAlien = function(){
             this.enemiesData.forEach((el,index)=>{
                 let alien = $(el.element).find('div');
-                if( this.timeElapsed - el.creationTime >= 5 ){
+                let disappear = 4;
+
+                switch (this.level) {
+                    case 2:
+                        disappear = 3.5;
+                        break;
+                    case 5:
+                        disappear = 3;
+                        break;
+                    case 8:
+                        disappear = 2.5;
+                        break;
+                    case 10:
+                        disappear = 2.2;
+                        break;
+                }
+
+                if( this.timeElapsed - el.creationTime >= disappear ){
                     alien.remove();
                     this.enemiesData.splice(index,1)
-                    }
-
-
-                //console.log(this.timeElapsed,  el.creationTime);
-                /*this.enemiesData = this.enemiesData.filter( el => {
-                    if( this.timeElapsed - el.creationTime <= 3){
-                        return el
-                    }
-                } )*/
+                }
             })
         };
         this.killAlien =  (e)=> {
@@ -170,7 +196,7 @@ $( () => {
             this.paused = true;
             this.timeElapsed = 0;
 
-            if(this.levelPoints >= 1000){
+            if(this.levelPoints >= 15000){
 
                 this.level++;
                 this.levelPoints = 0;

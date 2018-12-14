@@ -43,36 +43,36 @@
 
     &.animation1{
       &.level1{
-        animation: alienMove1 3.5s infinite linear;
+        animation: alienMove1 3.7s infinite linear;
       }
       &.level2{
-        animation: alienMove1 3s infinite linear;
+        animation: alienMove1 3.3s infinite linear;
       }
       &.level3{
-        animation: alienMove1 2.5s infinite linear;
+        animation: alienMove1 3s infinite linear;
       }
     }
 
     &.animation2{
       &.level1{
-        animation: alienMove2 3.5s infinite linear;
+        animation: alienMove2 3.7s infinite linear;
       }
       &.level2{
-        animation: alienMove2 3s infinite linear;
+        animation: alienMove2 3.3s infinite linear;
       }
       &.level3{
-        animation: alienMove2 2.5s infinite linear;
+        animation: alienMove2 3s infinite linear;
       }
     }
     &.animation3 {
       &.level1 {
-        animation: alienMove3 3.5s infinite linear alternate;
+        animation: alienMove3 3.7s infinite linear alternate;
       }
       &.level2 {
-        animation: alienMove3 3s infinite linear alternate;
+        animation: alienMove3 3.3s infinite linear alternate;
       }
       &.level3 {
-        animation: alienMove3 2.5s infinite linear alternate;
+        animation: alienMove3 3s infinite linear alternate;
       }
     }
 
@@ -92,7 +92,7 @@
 
 
   .reload{
-    animation: reload 1.5s 1 linear;
+    animation: reload .6s 1 linear;
   }
   #countDown{
     display: none;
