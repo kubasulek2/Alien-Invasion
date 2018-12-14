@@ -1,5 +1,5 @@
 $( () => {
-    const newGame = new Game();
+    let newGame = new Game();
 
     const cursor = {
         shot: new Audio('../music/shot.mp3'),
@@ -73,6 +73,8 @@ $( () => {
         this.level = 1;
         this.enemiesData = [];
         this.timeElapsed= 0;
+        this.paused = false;
+        this.gameOver = false;
         this.startNewGame = function () {
             let paused = false;
             //this.soundtrack();
@@ -83,11 +85,19 @@ $( () => {
                 this.drawEnemy();
 
                 const id = window.setInterval(()=>{
-                    this.timeElapsed = parseFloat((this.timeElapsed + 0.1).toFixed(2));
-                    !!(this.timeElapsed % 3) || this.drawEnemy();
+                    if (!this.paused) {
+                        this.timeElapsed = parseFloat((this.timeElapsed + 0.1).toFixed(2));
+                        !!(this.timeElapsed % 3) || this.drawEnemy();
+                        this.removeAlien();
 
-                    this.removeAlien();
-                },100)
+                        if (this.timeElapsed >= 4) {
+                            this.levelUp()
+                        }
+                        if (this.gameOver){
+                            clearInterval(id)
+                        }
+                    }
+                },100);
 
             },2500);
 
@@ -125,7 +135,7 @@ $( () => {
             }
         };
         this.soundtrack = function () {
-            const song = new Audio("../music/Quirky-Action2.mp3");
+            const song = new Audio("../music/supernaturew.mp3");
             song.addEventListener('ended', function() {
                 this.currentTime = 0;
                 this.play();
@@ -152,6 +162,24 @@ $( () => {
             flag || this.drawEnemy()
         };
         this.levelUp = function () {
+            this.boxes.empty();
+            this.enemiesData.length = 0;
+            this.paused = true;
+
+            if(this.score.text() > 2000){
+                this.score.text("0");
+                this.level++;
+                $('#level').text(this.level);
+                this.animateStart();
+                setTimeout(this.paused = false, 2500);
+
+            }else{
+                this.endGame()
+
+            }
+        };
+        this.endGame = function () {
+            this.gameOver = true;
 
         };
         this.animateStart = function () {
@@ -178,11 +206,7 @@ $( () => {
 
 
     $('#start').on("click", ()=>{
-        newGame.startNewGame()
-        //newGame.animateStart();
-        //newGame.soundtrack()
-
-
+        newGame.startNewGame();
     });
 
 });
