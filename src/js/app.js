@@ -86,6 +86,7 @@ $( () => {
 
                 const id = window.setInterval(()=>{
                     if (!this.paused) {
+
                         this.timeElapsed = parseFloat((this.timeElapsed + 0.1).toFixed(2));
                         !!(this.timeElapsed % 3) || this.drawEnemy();
                         this.removeAlien();
@@ -99,7 +100,7 @@ $( () => {
                     }
                 },100);
 
-            },3000);
+            },3500);
 
 
         };
@@ -165,14 +166,16 @@ $( () => {
             this.boxes.empty();
             this.enemiesData.length = 0;
             this.paused = true;
-            this.timeElapsed = -3.0;
+            this.timeElapsed = 0;
 
-            if(this.score.text() >= 1000){
-                this.score.text("0");
+            if(this.score.text() >= 1000 * this.level){
+
                 this.level++;
                 $('#level').text(this.level);
                 this.animateStart();
-                setTimeout(this.paused = false, 2500);
+                setTimeout(()=>{
+                    this.paused = false
+                }, 3500);
 
             }else{
                 this.endGame()
@@ -189,23 +192,25 @@ $( () => {
         };
         this.animateStart = function () {
             const countDown = $('#countDown');
-            let counter = 4;
+            let counter = 3;
             countDown.html(`Level&nbsp;${this.level}`);
 
             countDown.addClass("countAnimation");
 
-            let id = window.setInterval(()=>{
-
-                counter--;
+            setTimeout( ()=> {
                 countDown.text(counter);
-                if(counter<0){
-                    countDown.text("Start");
-                    if(counter<-1){
-                        countDown.removeClass("countAnimation");
-                        window.clearInterval(id);
+                let id = window.setInterval(()=>{
+                    counter--;
+                    countDown.text(counter);
+                    if(counter<0){
+                        countDown.text("Start");
+                        if(counter<-1){
+                            countDown.removeClass("countAnimation");
+                            window.clearInterval(id);
+                        }
                     }
-                }
-            },500)
+                },500)
+            },1000)
         }
     }
 
