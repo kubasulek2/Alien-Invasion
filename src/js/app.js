@@ -70,13 +70,14 @@ $( () => {
         this.game = $('#game');
         this.score =$('#score');
         this.points = 0;
+        this.levelPoints = 0;
         this.level = 1;
         this.enemiesData = [];
         this.timeElapsed= 0;
         this.paused = false;
         this.gameOver = false;
         this.startNewGame = function () {
-            let paused = false;
+
             //this.soundtrack();
             this.game.on('click','.alien', this.killAlien);
             this.animateStart();
@@ -131,6 +132,7 @@ $( () => {
 
                 this.enemiesData = this.enemiesData.filter((el)=>el.element !== e.currentTarget.parentElement);
                 this.points += 1000;
+                this.levelPoints += 1000;
                 this.score.text(this.points)
 
             }
@@ -158,7 +160,7 @@ $( () => {
                     this.enemiesData.push({location:index, element:el, creationTime: this.timeElapsed})
                 }
             });
-            alien.addClass(`animation${Math.ceil(Math.random()*3)}`).addClass(`level${this.level}`);
+            alien.addClass(`animation${Math.ceil(Math.random()*3)}`).addClass(`level${this.level<=9 ? Math.ceil(this.level/3) : 3 }`);
 
             flag || this.drawEnemy()
         };
@@ -168,13 +170,15 @@ $( () => {
             this.paused = true;
             this.timeElapsed = 0;
 
-            if(this.score.text() >= 1000 * this.level){
+            if(this.levelPoints >= 1000){
 
                 this.level++;
+                this.levelPoints = 0;
                 $('#level').text(this.level);
                 this.animateStart();
                 setTimeout(()=>{
-                    this.paused = false
+                    this.paused = false;
+                    this.drawEnemy();
                 }, 3500);
 
             }else{
