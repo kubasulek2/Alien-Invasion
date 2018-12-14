@@ -81,14 +81,8 @@ html {
   justify-content: center;
   align-items: center;
   h1{
-    font-size: 2em;
+    font-size: 20em;
     font-family: "Zero Velocity BRK";
     color: rgb(175, 17, 28);
-    animation: gameOver 0.3s 1 linear forwards;
-  }
-}
-@keyframes gameOver {
-  100%{
-    font-size: 20em;
   }
 }

@@ -99,7 +99,7 @@ $( () => {
                     }
                 },100);
 
-            },2500);
+            },3000);
 
 
         };
@@ -165,8 +165,9 @@ $( () => {
             this.boxes.empty();
             this.enemiesData.length = 0;
             this.paused = true;
+            this.timeElapsed = -3.0;
 
-            if(this.score.text() > 2000){
+            if(this.score.text() >= 1000){
                 this.score.text("0");
                 this.level++;
                 $('#level').text(this.level);
@@ -188,17 +189,18 @@ $( () => {
         };
         this.animateStart = function () {
             const countDown = $('#countDown');
-            let counter = 3;
+            let counter = 4;
+            countDown.html(`Level&nbsp;${this.level}`);
 
             countDown.addClass("countAnimation");
 
             let id = window.setInterval(()=>{
+
                 counter--;
                 countDown.text(counter);
                 if(counter<0){
                     countDown.text("Start");
                     if(counter<-1){
-                        countDown.text("3");
                         countDown.removeClass("countAnimation");
                         window.clearInterval(id);
                     }

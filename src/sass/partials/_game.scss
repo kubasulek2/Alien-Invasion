@@ -74,7 +74,7 @@
   #countDown{
     display: none;
     position: absolute;
-    font-size: 10em;
+    font-size: 8em;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
@@ -82,7 +82,7 @@
   }
   #countDown.countAnimation{
     display: block;
-    animation: countDown .5s 5 linear;
+    animation: countDown .5s 6 linear;
   }
 
 }
