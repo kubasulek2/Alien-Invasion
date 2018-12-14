@@ -287,12 +287,19 @@ $( () => {
     $('#start').on("click", startGame);
     $('#info').on('click', '#pause', function () {
         if ($(this).text() === 'pause ||'){
-            console.log('aa');
+
             $(this).text('Resume');
-            newGame.paused = true
-        }else{
+            newGame.paused = true;
+            console.log(newGame.enemiesData[0].element);
+            newGame.enemiesData.forEach((el)=>{
+                $(el.element).find('.alien').addClass("freeze")
+            })
+        } else{
             $(this).text('pause ||');
-            newGame.paused = false
+            newGame.paused = false;
+            newGame.enemiesData.forEach((el)=>{
+                $(el.element).find('.alien').removeClass("freeze")
+            })
         }
     })
 });

@@ -44,6 +44,7 @@
     &.animation1{
       &.level1{
         animation: alienMove1 3.7s infinite linear;
+
       }
       &.level2{
         animation: alienMove1 3.3s infinite linear;
@@ -51,6 +52,10 @@
       &.level3{
         animation: alienMove1 3s infinite linear;
       }
+      &.freeze{
+        animation-play-state: paused;
+      }
+
     }
 
     &.animation2{
@@ -63,6 +68,9 @@
       &.level3{
         animation: alienMove2 3s infinite linear;
       }
+      &.freeze{
+        animation-play-state: paused;
+      }
     }
     &.animation3 {
       &.level1 {
@@ -73,6 +81,9 @@
       }
       &.level3 {
         animation: alienMove3 3s infinite linear alternate;
+      }
+      &.freeze{
+        animation-play-state: paused;
       }
     }
 
