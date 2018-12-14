@@ -5,7 +5,7 @@ $( () => {
         shot: new Audio('../music/shot.mp3'),
         reload: new Audio('../music/reload.mp3'),
         disabled: false,
-        subject: $('#cursor'),
+        subject: '',
         mouseX: 0,
         mouseY: 0,
         xPos: 0,
@@ -18,6 +18,9 @@ $( () => {
 
         },
         animateCursor: function(delay) {
+
+            this.subject = $('#cursor');
+            newGame.game.css('cursor', 'none');
             let dateNow = Date.now,
                 requestAnimation=window.requestAnimationFrame,
                 start=dateNow(),
@@ -36,23 +39,28 @@ $( () => {
                 this.subject.addClass("shot");
                 newGame.bullets.pop();
                 newGame.magazine.text(newGame.bullets.join(''));
-                console.log(newGame.bullets);
                 this.disabled = true;
 
-                if (newGame.magazine.length = 0){
+
+                if (newGame.bullets.length === 0){
+
                     setTimeout(()=>{
+                        this.reload.play();
                         this.subject.removeClass("shot");
                         this.subject.addClass("reload");
                         setTimeout(()=>{
                             this.subject.removeClass("reload");
-                            this.disabled = false
-                        },2000)
-                    },500)
+                            this.disabled = false;
+                            newGame.bullets = ['|','|','|','|','|','|','|','|','|','|','|','|'];
+                            newGame.magazine.text(newGame.bullets.join(''));
+
+                        },2200)
+                    },550)
                 } else{
                     setTimeout(()=> {
                         this.disabled = false;
                         this.subject.removeClass("shot")
-                    },500)
+                    },550)
                 }
             }
 
@@ -65,31 +73,18 @@ $( () => {
     //cursor.clear();  zeby zatrzymac animacje
 
 
-    newGame.game.on('mousemove', function(e){
-        cursor.mouseX = e.pageX - newGame.game.offset().left;
-        cursor.mouseY = e.pageY - newGame.game.offset().top;
-    });
-    newGame.game.on('mouseenter', function () {
-        cursor.subject.css("display","block");
-    });
 
-    newGame.game.on('mouseleave',function () {
-        cursor.subject.removeAttr('style')
-    });
-    newGame.game.on('click', ()=>{
-        cursor.handleClick();
-
-    });
 
 
 
     function Game() {
         this.boxes = $('.box');
         this.magazine = $('#magazine');
-        this.bullets = ['|','|','|','|','|','|','|','|','|','|','|','|'];
         this.game = $('#game');
         this.score =$('#score');
         this.timer = $('#time');
+        this.button= $('#start');
+        this.bullets = ['|'];
         this.points = 0;
         this.levelPoints = 0;
         this.level = 1;
@@ -99,9 +94,11 @@ $( () => {
         this.gameOver = false;
         this.startNewGame = function () {
 
-            this.soundtrack();
+            //this.soundtrack();
             this.game.on('click','.alien', this.killAlien);
             this.animateStart();
+
+
 
             setTimeout(()=>{
                 this.drawEnemy();
@@ -145,17 +142,17 @@ $( () => {
         this.removeAlien = function(){
             this.enemiesData.forEach((el,index)=>{
                 let alien = $(el.element).find('div');
-                let disappear = 4;
+                let disappear = 3.8;
 
                 switch (this.level) {
                     case 2:
-                        disappear = 3.5;
+                        disappear = 3.4;
                         break;
                     case 5:
                         disappear = 3;
                         break;
                     case 8:
-                        disappear = 2.5;
+                        disappear = 2.6;
                         break;
                     case 10:
                         disappear = 2.2;
@@ -177,8 +174,8 @@ $( () => {
                 });
 
                 this.enemiesData = this.enemiesData.filter((el)=>el.element !== e.currentTarget.parentElement);
-                this.points += 1000;
-                this.levelPoints += 1000;
+                this.points += (1000 + 100*(this.level-1) );
+                this.levelPoints += (1000 + 100*(this.level-1) );
                 this.score.text(this.points)
 
             }
@@ -264,11 +261,38 @@ $( () => {
         }
     }
 
+    function startGame(e){
+        newGame.game.on('mousemove', function(e){
+            cursor.mouseX = e.pageX - newGame.game.offset().left;
+            cursor.mouseY = e.pageY - newGame.game.offset().top;
+        });
+        newGame.game.on('mouseenter', function () {
+            cursor.subject.css("display","block");
+        });
 
+        newGame.game.on('mouseleave',function () {
+            cursor.subject.removeAttr('style')
+        });
+        newGame.game.on('click', ()=>{
+            cursor.handleClick();
 
-    $('#start').on("click", ()=>{
+        });
         newGame.startNewGame();
         cursor.animateCursor(1);
-    });
+        $(e.currentTarget).remove();
+        $('#info').prepend($('<button id="pause">pause ||</button>'))
 
+    }
+
+    $('#start').on("click", startGame);
+    $('#info').on('click', '#pause', function () {
+        if ($(this).text() === 'pause ||'){
+            console.log('aa');
+            $(this).text('Resume');
+            newGame.paused = true
+        }else{
+            $(this).text('pause ||');
+            newGame.paused = false
+        }
+    })
 });
