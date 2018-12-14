@@ -92,7 +92,10 @@
 
 
   .reload{
-    animation: reload .6s 1 linear;
+    animation: reload 2s 1 linear;
+  }
+  .shot{
+    animation: shot 0.45s 1 linear;
   }
   #countDown{
     display: none;
@@ -110,13 +113,18 @@
 
 }
 @keyframes reload {
-  5%{ transform: translateY(-40%)}
-  10%{ transform: translateY(0%)}
-  30%{ transform: translateY(0%)}
-  35%{ transform: translateY(40%)}
-  40%{ transform: translateY(-20%)}
-  60%{ transform: translateY(20%)}
-  80%{ transform: translateY(0%)}
+  5%{ transform: translate(20%, -20%)}
+  10%{ transform: translate(20%, 0%)}
+  30%{ transform: translate(-10%, 20%)}
+  35%{ transform: translate(10%, 40%)}
+  40%{ transform: translate(0%, -20%)}
+  60%{ transform: translate(0%, 20%)}
+  80%{ transform: translate(0%, 0%)}
+}
+@keyframes shot {
+  10%{ transform: translate(10%, -80%)}
+  20%{ transform: translate(20%, -10%)}
+  40%{ transform: translate(0, 0)}
 }
 @keyframes countDown {
   80%{

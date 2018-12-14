@@ -3,6 +3,7 @@ $( () => {
 
     const cursor = {
         shot: new Audio('../music/shot.mp3'),
+        reload: new Audio('../music/reload.mp3'),
         disabled: false,
         subject: $('#cursor'),
         mouseX: 0,
@@ -29,21 +30,38 @@ $( () => {
             return this.clear = function(){ stop=1 };
         },
         handleClick: function(){
+
             if (!this.disabled){
                 this.shot.play();
-                this.subject.addClass("reload");
+                this.subject.addClass("shot");
+                newGame.bullets.pop();
+                newGame.magazine.text(newGame.bullets.join(''));
+                console.log(newGame.bullets);
+                this.disabled = true;
+
+                if (newGame.magazine.length = 0){
+                    setTimeout(()=>{
+                        this.subject.removeClass("shot");
+                        this.subject.addClass("reload");
+                        setTimeout(()=>{
+                            this.subject.removeClass("reload");
+                            this.disabled = false
+                        },2000)
+                    },500)
+                } else{
+                    setTimeout(()=> {
+                        this.disabled = false;
+                        this.subject.removeClass("shot")
+                    },500)
+                }
             }
 
 
-            this.disabled = true;
-            window.setTimeout(()=> {
-                this.disabled = false;
-                this.subject.removeClass("reload")
-            },600)
+
         }
 
     };
-    cursor.animateCursor(1);
+
     //cursor.clear();  zeby zatrzymac animacje
 
 
@@ -67,6 +85,8 @@ $( () => {
 
     function Game() {
         this.boxes = $('.box');
+        this.magazine = $('#magazine');
+        this.bullets = ['|','|','|','|','|','|','|','|','|','|','|','|'];
         this.game = $('#game');
         this.score =$('#score');
         this.timer = $('#time');
@@ -248,6 +268,7 @@ $( () => {
 
     $('#start').on("click", ()=>{
         newGame.startNewGame();
+        cursor.animateCursor(1);
     });
 
 });
