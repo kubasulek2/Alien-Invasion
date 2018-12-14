@@ -18,6 +18,7 @@ html {
   body {
     font-size: 100%;
     color: $font-color;
+    position: relative;
   }
 }
 
@@ -64,5 +65,30 @@ html {
   }
   .row-2{
     height: 90%;
+  }
+
+}
+#gameOver{
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(255,255,255,.9);
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  h1{
+    font-size: 2em;
+    font-family: "Zero Velocity BRK";
+    color: rgb(175, 17, 28);
+    animation: gameOver 0.3s 1 linear forwards;
+  }
+}
+@keyframes gameOver {
+  100%{
+    font-size: 20em;
   }
 }

@@ -180,6 +180,10 @@ $( () => {
         };
         this.endGame = function () {
             this.gameOver = true;
+            $('#container').after($('<div id="gameOver"><h1>Game<br /> Over!</h1></div>'));
+            $('body').on('click', function() {
+                location.reload();
+            })
 
         };
         this.animateStart = function () {
