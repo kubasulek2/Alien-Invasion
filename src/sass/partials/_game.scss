@@ -40,19 +40,42 @@
     width: 40%;
     height: 24%;
     border-radius: 50%;
-    &.animation1{
-      animation: alienMove1 4s infinite linear;
 
-    }
-    &.animation2{
-      animation: alienMove2 4s infinite linear;
+    &.animation1{
       &.level1{
-        border: 2px solid black;
+        animation: alienMove1 4s infinite linear;
+      }
+      &.level2{
+        animation: alienMove1 3s infinite linear;
+      }
+      &.level3{
+        animation: alienMove1 2s infinite linear;
       }
     }
-    &.animation3{
-      animation: alienMove3 4s infinite linear alternate;
+
+    &.animation2{
+      &.level1{
+        animation: alienMove2 4s infinite linear;
+      }
+      &.level2{
+        animation: alienMove2 3s infinite linear;
+      }
+      &.level3{
+        animation: alienMove2 2s infinite linear;
+      }
     }
+    &.animation3 {
+      &.level1 {
+        animation: alienMove3 4s infinite linear alternate;
+      }
+      &.level2 {
+        animation: alienMove3 3s infinite linear alternate;
+      }
+      &.level3 {
+        animation: alienMove3 2s infinite linear alternate;
+      }
+    }
+
     img{
       width: 100%;
       height: auto;

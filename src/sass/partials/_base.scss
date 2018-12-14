@@ -25,7 +25,7 @@ html {
 #container{
   background: $gradient;
   width: nth($main-width, 1);
-  height: calc(#{nth($main-width, 1)} * 0.5625);
+  height: calc(#{nth($main-width, 1)} * 0.62);
   margin: 10vh auto;
   display: flex;
   flex-direction: column;
@@ -34,15 +34,15 @@ html {
 
   @include mQ(1024px) {
     width: nth($main-width, 2);
-    height: calc(#{nth($main-width, 2)} * 0.5625);
+    height: calc(#{nth($main-width, 2)} * 0.62);
   }
   @include mQ(1200px) {
     width: nth($main-width, 3);
-    height: calc(#{nth($main-width, 3)} * 0.5625);
+    height: calc(#{nth($main-width, 3)} * 0.62);
   }
   @include mQ(1400px) {
     width: nth($main-width, 4);
-    height: calc(#{nth($main-width, 4)} * 0.5625);
+    height: calc(#{nth($main-width, 4)} * 0.62);
   }
 
   .row {
@@ -56,15 +56,20 @@ html {
       font-family: 'Zero Velocity BRK';
       text-align: center;
       width: 100%;
-      font-size: 4em;
-      padding-top: 0.2em;
+      font-size: 5em;
+      //padding-top: 0.4em;
+
     }
   }
   .row-1{
-    height: 10%;
+    height: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255,255,255,.2);
   }
   .row-2{
-    height: 90%;
+    height: 85%;
   }
 
 }
