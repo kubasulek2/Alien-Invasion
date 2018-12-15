@@ -83,8 +83,7 @@ $( () => {
         this.game = $('#game');
         this.score =$('#score');
         this.timer = $('#time');
-        this.button= $('#start');
-        this.bullets = ['|'];
+        this.bullets = ['|','|','|','|','|','|','|','|','|','|','|','|'];
         this.points = 0;
         this.levelPoints = 0;
         this.level = 1;
@@ -94,7 +93,7 @@ $( () => {
         this.gameOver = false;
         this.startNewGame = function () {
 
-            //this.soundtrack();
+            this.soundtrack();
             this.game.on('click','.alien', this.killAlien);
             this.animateStart();
 
@@ -301,5 +300,11 @@ $( () => {
                 $(el.element).find('.alien').removeClass("freeze")
             })
         }
+    });
+    $('.fa-info').on("click", function () {
+        $('.modal').css("display","flex");
+        $('.modal').animate({width: "10%"},400);
+
+
     })
 });

@@ -18,6 +18,7 @@
     margin-bottom: 2em;
     border-radius: 4px;
     padding: .5em;
+    cursor: pointer;
 
     &:active, &:focus{
       outline: none;
@@ -32,4 +33,20 @@
       height: 1em;
     }
   }
+}
+.modal{
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 0;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  right: 0;
+  font-size: 2em;
+  color: black;
+  background: white;
+  border-left: 2px solid #ccc;
+  overflow: hidden;
 }
