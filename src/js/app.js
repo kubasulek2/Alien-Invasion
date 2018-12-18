@@ -230,8 +230,11 @@ $( () => {
             this.paused = true;
             this.timeElapsed = 0;
 
-            if(this.levelPoints >= 15000){
+            if(this.level === 10){
+                this.endGame()
+            }
 
+            if(this.levelPoints >= 15000){
                 this.level++;
                 this.levelPoints = 0;
                 $('#level').text(this.level);
@@ -248,7 +251,12 @@ $( () => {
         };
         this.endGame = function () {
             this.gameOver = true;
+            let score = $('<h2></h2>').text(`Your score: ${this.points} points`)
             $('#container').after($('<div id="gameOver"><h1>Game<br /> Over!</h1></div>'));
+            setTimeout(()=>{
+                $('#gameOver h1').after(score)
+            },1);
+
             $('body').on('click', function() {
                 location.reload();
             })
@@ -298,8 +306,6 @@ $( () => {
         });
         newGame.startNewGame();
         cursor.animateCursor(1);
-        /*$(e.currentTarget).remove();
-        $('#info').prepend($('<button id="pause">pause ||</button>'))*/
         e.text("pause ||");
 
     }
@@ -314,7 +320,8 @@ $( () => {
                 newGame.paused = true;
                 if (newGame.enemiesData.length > 0) {
                     newGame.enemiesData.forEach((el) => {
-                        $(el.element).find('.alien').addClass("freeze")
+                        $(el.element).find('.alien').addClass("freeze");
+                        $(el.element).find('.alien').css("pointer-events", "none")
                     })
                 }
             } else{
@@ -322,32 +329,14 @@ $( () => {
                 newGame.paused = false;
                 if (newGame.enemiesData.length > 0) {
                     newGame.enemiesData.forEach((el)=>{
-                        $(el.element).find('.alien').removeClass("freeze")
+                        $(el.element).find('.alien').removeClass("freeze");
+                        $(el.element).find('.alien').css("pointer-events", "")
                     })
                 }
             }
         }
     });
-    /*$('#info').on('click', '#pause', function () {
-        if (!newGame.paused){
 
-            $(this).text('Resume');
-            newGame.paused = true;
-            if (newGame.enemiesData.length > 0) {
-                newGame.enemiesData.forEach((el) => {
-                    $(el.element).find('.alien').addClass("freeze")
-                })
-            }
-        } else{
-            $(this).text('pause ||');
-            newGame.paused = false;
-            if (newGame.enemiesData.length > 0) {
-                newGame.enemiesData.forEach((el)=>{
-                    $(el.element).find('.alien').removeClass("freeze")
-                })
-            }
-        }
-    });*/
     $('.fa-info').on("click", function () {
         $('.modal').css("display","flex");
         $('.modal').animate({width: "30%"},400)

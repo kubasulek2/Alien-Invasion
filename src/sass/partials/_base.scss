@@ -97,11 +97,19 @@ html {
   background: rgba(0,0,0, 0.8);
   text-align: center;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   h1{
-    font-size: 20em;
+    font-size: 15em;
     font-family: "Zero Velocity BRK";
     color: rgb(175, 17, 28);
   }
+  h2{
+    font-size: 6em;
+    margin-top: 0.5em;
+    color: white;
+    font-family: 'Invasion2000';
+  }
+
 }
