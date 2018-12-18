@@ -120,6 +120,9 @@
   #countDown.countAnimation{
     display: block;
     animation: countDown .5s 1s 5 linear;
+    &.freeze{
+      animation-play-state: paused;
+    }
   }
 
 }

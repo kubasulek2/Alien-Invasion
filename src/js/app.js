@@ -101,7 +101,9 @@ $( () => {
 
 
             setTimeout(()=>{
-                this.drawEnemy();
+                if (!this.paused){
+                    this.drawEnemy();
+                }
 
                 const id = window.setInterval(()=>{
                     if (!this.paused) {
@@ -261,6 +263,7 @@ $( () => {
             setTimeout( ()=> {
                 countDown.text(counter);
                 let id = window.setInterval(()=>{
+
                     counter--;
                     countDown.text(counter);
                     if(counter<0){
@@ -300,27 +303,35 @@ $( () => {
 
     $('#start').on("click", startGame);
     $('#info').on('click', '#pause', function () {
-        if ($(this).text() === 'pause ||'){
+        if (!newGame.paused){
 
             $(this).text('Resume');
             newGame.paused = true;
-            console.log(newGame.enemiesData[0].element);
-            newGame.enemiesData.forEach((el)=>{
-                $(el.element).find('.alien').addClass("freeze")
-            })
+            if (newGame.enemiesData.length > 0) {
+                newGame.enemiesData.forEach((el) => {
+                    $(el.element).find('.alien').addClass("freeze")
+                })
+            }
         } else{
             $(this).text('pause ||');
             newGame.paused = false;
-            newGame.enemiesData.forEach((el)=>{
-                $(el.element).find('.alien').removeClass("freeze")
-            })
+            if (newGame.enemiesData.length > 0) {
+                newGame.enemiesData.forEach((el)=>{
+                    $(el.element).find('.alien').removeClass("freeze")
+                })
+            }
         }
-    });
+    }).off('click','#pause');
     $('.fa-info').on("click", function () {
         $('.modal').css("display","flex");
-        $('.modal').animate({width: "10%"},400);
-
-
+        $('.modal').animate({width: "30%"},400)
     });
+    $('#close').on('click', function () {
+        $('.modal').animate({width: "0"},400, function () {
+            $('.modal').css({'display':'none'})
+
+        });
+    });
+
     $('.fa-volume-up').on('click', newGame.mute)
 });
