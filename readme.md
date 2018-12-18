@@ -1,4 +1,6 @@
-My game info here:
+Game made with:
+Sass;
+Jquery;
 
 
 Credits to:
