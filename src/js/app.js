@@ -92,6 +92,7 @@ $( () => {
         this.timeElapsed= 0;
         this.paused = false;
         this.gameOver = false;
+        this.started = false;
         this.startNewGame = function () {
 
             this.soundtrack();
@@ -279,6 +280,7 @@ $( () => {
     }
 
     function startGame(e){
+        newGame.started = true;
         newGame.game.on('mousemove', function(e){
             cursor.mouseX = e.pageX - newGame.game.offset().left;
             cursor.mouseY = e.pageY - newGame.game.offset().top;
@@ -296,13 +298,37 @@ $( () => {
         });
         newGame.startNewGame();
         cursor.animateCursor(1);
-        $(e.currentTarget).remove();
-        $('#info').prepend($('<button id="pause">pause ||</button>'))
+        /*$(e.currentTarget).remove();
+        $('#info').prepend($('<button id="pause">pause ||</button>'))*/
+        e.text("pause ||");
 
     }
 
-    $('#start').on("click", startGame);
-    $('#info').on('click', '#pause', function () {
+    $('#start').on("click", function (e){
+        const event = $(e.currentTarget);
+        if (!newGame.started){
+            startGame(event)
+        }else{
+            if (!newGame.paused){
+                $(this).text('Resume');
+                newGame.paused = true;
+                if (newGame.enemiesData.length > 0) {
+                    newGame.enemiesData.forEach((el) => {
+                        $(el.element).find('.alien').addClass("freeze")
+                    })
+                }
+            } else{
+                $(this).text('pause ||');
+                newGame.paused = false;
+                if (newGame.enemiesData.length > 0) {
+                    newGame.enemiesData.forEach((el)=>{
+                        $(el.element).find('.alien').removeClass("freeze")
+                    })
+                }
+            }
+        }
+    });
+    /*$('#info').on('click', '#pause', function () {
         if (!newGame.paused){
 
             $(this).text('Resume');
@@ -321,7 +347,7 @@ $( () => {
                 })
             }
         }
-    }).off('click','#pause');
+    });*/
     $('.fa-info').on("click", function () {
         $('.modal').css("display","flex");
         $('.modal').animate({width: "30%"},400)
