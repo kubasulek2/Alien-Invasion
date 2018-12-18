@@ -78,6 +78,7 @@ $( () => {
 
 
     function Game() {
+        this.song = new Audio("../music/supernaturew.mp3");
         this.boxes = $('.box');
         this.magazine = $('#magazine');
         this.game = $('#game');
@@ -180,13 +181,27 @@ $( () => {
             }
         };
         this.soundtrack = function () {
-            const song = new Audio("../music/supernaturew.mp3");
-            song.addEventListener('ended', function() {
+
+            this.song.addEventListener('ended', function() {
                 this.currentTime = 0;
                 this.play();
             }, false);
-            song.play()
+            this.song.play()
         };
+        this.enableAudioControl = function () {
+            const icon = $('#options i:first-child');
+            let flag = true;
+            return ()=> {
+               flag ? icon.addClass("fa-volume-mute") : icon.removeClass("fa-volume-mute");
+                flag ? icon.removeClass("fa-volume-up") : icon.addClass("fa-volume-up");
+                this.song.muted = flag;
+                cursor.shot.muted = flag;
+                cursor.reload.muted = flag;
+                flag = !flag
+            }
+        };
+        this.mute = this.enableAudioControl();
+
         this.drawEnemy = function () {
             let alien = $("<div class='alien'><img src=\"images/alien.png\" alt=\"\"></div>");
             let flag = false;
@@ -306,5 +321,6 @@ $( () => {
         $('.modal').animate({width: "10%"},400);
 
 
-    })
+    });
+    $('.fa-volume-up').on('click', newGame.mute)
 });
